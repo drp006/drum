@@ -1,19 +1,21 @@
-// detecting button press
+// detecting button press.
 var i=0;
 var numOfButtons=document.querySelectorAll(".drum").length;
 while(i<numOfButtons){
     document.querySelectorAll(".drum")[i].addEventListener("click",function (){
         var whichDrum=this.innerHTML;
         makeSound(whichDrum);
+        buttonAnimation(whichDrum);
         
     });
     i++;
 }
-// detecting keyboard press
+// detecting keyboard press.
 document.addEventListener("keypress",function(event){
     makeSound(event.key);
+    buttonAnimation(event.key);
 });
-// playing sound
+// playing sound.
 function makeSound(key){
     switch (key) {
         case "w":
@@ -48,4 +50,12 @@ function makeSound(key){
             console.log(whichDrum);
             break;
        }
+}
+// for button animation.
+function buttonAnimation(currentKey){
+    var activeButton = document.querySelector("."+currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");
+    },100);
 }
